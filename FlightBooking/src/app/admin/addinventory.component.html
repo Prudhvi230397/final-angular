@@ -1,0 +1,197 @@
+<div class="row">
+    <div class="col-xl-9">
+        <div class="card border-0">
+            <div class="card-body">
+                <h2>Add Airline Inventory</h2>
+
+                <form class="row g-3" [formGroup]="InventoryModel.formInventoryGroup">
+                    <div class="col-md-4">
+                        <label for="flightNoControl" class="form-label">Flight No</label>
+                        <input [(ngModel)]="InventoryModel.flightNo" formControlName="flightNoControl"
+                            class="form-control" type="text" />
+                        <p style="color:red" [hidden]="!hasError('required','flightNoControl')">Flight No is required
+                        </p>
+
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Airline Id</label>
+                        <select class="form-select" [(ngModel)]="InventoryModel.airlineId"
+                            formControlName="airlineIdControl">
+                            <option *ngFor="let res of AirlineDetailsmodels" value={{res.airlineId}}>{{res.airlineName}}
+                            </option>
+
+                        </select>
+                        <p style="color:red" [hidden]="!hasError('required','airlineIdControl')">Airline Id is required
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Boarding </label>
+                        <select class="form-select" [(ngModel)]="InventoryModel.boardingPlace"
+                            formControlName="boardingPlaceControl">
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Banglore">Banglore</option>
+                            <option value="Indore">Indore</option>
+                            <option value="Kochi">Kochi</option>
+                        </select>
+                        <p style="color:red" [hidden]="!hasError('required','boardingPlaceControl')">Boarding Place is
+                            required</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Destination</label>
+                        <select class="form-select" [(ngModel)]="InventoryModel.destination"
+                            formControlName="destinationControl">
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Banglore">Banglore</option>
+                            <option value="Indore">Indore</option>
+                            <option value="Kochi">Kochi</option>
+                        </select>
+                        <p style="color:red" [hidden]="!hasError('required','destinationControl')">Destination is
+                            required</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Start date</label>
+                        <input [(ngModel)]="InventoryModel.startDateTime" formControlName="startDateTimeControl"
+                            class="form-control" type="date" />
+                        <p style="color:red" [hidden]="!hasError('required','startDateTimeControl')">Start date is
+                            required</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">End date</label>
+                        <input [(ngModel)]="InventoryModel.endDateTime" formControlName="endDateTimeControl"
+                            class="form-control" type="date" />
+                        <p style="color:red" [hidden]="!hasError('required','endDateTimeControl')">End Date is
+                            required</p>
+                    </div>
+                    <div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <label class="form-label">Schedule Days</label>
+                        </div>
+                        <!-- <input [(ngModel)]="InventoryModel.scheduledDaysId" formControlName="scheduledDaysIdControl"
+                            class="form-control" type="text" /> -->
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" [ngModelOptions]="{standalone: true}"  [(ngModel)]="InventoryModel.monday" value="true">
+                            <label class="form-check-label" >Monday</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="InventoryModel.tuesday" value="true">
+                            <label class="form-check-label" for="inlineCheckbox2">Tuesday</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="InventoryModel.wednesday" value="true">
+                            <label class="form-check-label" for="inlineCheckbox3">Wednesday</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="InventoryModel.thursday" value="true">
+                            <label class="form-check-label" for="inlineCheckbox2">Thursday</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="InventoryModel.friday" value="true">
+                            <label class="form-check-label" for="inlineCheckbox2">Friday</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="InventoryModel.saturday" value="true">
+                            <label class="form-check-label" for="inlineCheckbox2">Saturday</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="InventoryModel.sunday" value="true">
+                            <label class="form-check-label" for="inlineCheckbox2">Sunday</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Travel Start Time</label>
+                        <input [(ngModel)]="InventoryModel.travelstarttime" formControlName="travelstarttimeControl"
+                            class="form-control" type="time" />
+                        <p style="color:red" [hidden]="!hasError('required','travelstarttimeControl')">Travel Start Time
+                            is required</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Travel End Time</label>
+                        <input [(ngModel)]="InventoryModel.travelendtime" formControlName="travelendtimeControl"
+                            class="form-control" type="time" />
+                        <p style="color:red" [hidden]="!hasError('required','travelendtimeControl')">Travel End Time is
+                            required</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Instrument Used</label>
+                        <select class="form-select" [(ngModel)]="InventoryModel.instrumentUsed"
+                            formControlName="instrumentUsedControl">
+                            <option value="A320">A320</option>
+                            <option value="A320 neo">A320 neo</option>
+                        </select>
+                        <p style="color:red" [hidden]="!hasError('required','instrumentUsedControl')">Instrument
+                            Used is
+                            required</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">No of Business Class seats</label>
+                        <input [(ngModel)]="InventoryModel.businessClassSeats"
+                            formControlName="businessClassSeatsControl" class="form-control" type="text" />
+                        <p style="color:red" [hidden]="!hasError('required','businessClassSeatsControl')">No. of
+                            business Seats is
+                            required</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">No of Economy Class seats</label>
+                        <input [(ngModel)]="InventoryModel.economySeats" formControlName="economySeatsControl"
+                            class="form-control" type="text" />
+                        <p style="color:red" [hidden]="!hasError('required','economySeatsControl')">No Of Economy
+                            Class
+                            seats is
+                            required</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Ticket Cost</label>
+                        <input [(ngModel)]="InventoryModel.ticketCost" formControlName="ticketCostControl"
+                            class="form-control" type="text" />
+                        <p style="color:red" [hidden]="!hasError('required','ticketCostControl')">Ticket Cost is
+                            required</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">No Of rows</label>
+                        <input [(ngModel)]="InventoryModel.noOfRows" formControlName="noOfRowsControl"
+                            class="form-control" type="text" />
+                        <p style="color:red" [hidden]="!hasError('required','noOfRowsControl')">No Of rows is
+                            required</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Meals</label>
+                        <select class="form-select" [(ngModel)]="InventoryModel.mealId" formControlName="mealIdControl">
+                            <option value="Veg">Veg</option>
+                            <option value="Non-Veg">Non-Veg</option>
+                            <option value="Both">Both</option>
+                        </select>
+                        <p style="color:red" [hidden]="!hasError('required','noOfRowsControl')">Meals is
+                            required</p>
+                    </div>
+                    <!-- <div>
+                    <label class="form-label" >From Date</label>
+                    <select class="form-select"[(ngModel)]="AirLineModel.isBlocked" formControlName="isBlockedControl" >
+                     
+                      <option value=true>Yes</option>
+                      <option value=false>No</option>
+                     
+                    </select>
+                    <p style="color:red"  [hidden]="!hasError('required','isBlockedControl')">Select Block Airline is required</p>
+                  </div> -->
+
+                    <div class="py-4">
+                        <input type="submit" class="btn btn-primary"
+                            [disabled]="!(InventoryModel.formInventoryGroup.valid)" value="Add Inventory"
+                            (click)="AddInventory()" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

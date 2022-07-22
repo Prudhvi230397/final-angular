@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-xl-9">
+        <div class="card border-0">
+            <div class="card-body">
+                <h2>Add Airline</h2>
+                <!-- <form [formGroup]="AirLineModel.formAirlineGroup"> -->
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Email Id</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" [(ngModel)]="HistoryModel.emailId" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                
+                <div class="py-4">
+                    <input type="submit" class="btn btn-primary"   value="Get Ticket Details" (click)="GetDetails()" />
+                </div>
+                <!-- </form>  -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<form class="row g-3">
+    <div class="col-md-4">
+        <!-- <label class="form-label">Ticket Details</label> -->
+        <table class="table table-striped-columns">
+    <caption>Ticket Details</caption>
+    <thead class="table-light">
+        <tr class="table-primary">
+       <th scope="col">PNR</th>
+       <th scope="col">Flight Number</th>
+       <th scope="col">Boarding</th>
+       <th scope="col">Destination</th>
+       <th scope="col">Start Date Time</th>
+       <th scope="col" hidden>End Date Time</th>
+       <th scope="col" hidden>Ticket Cost</th>
+       <th scope="col" hidden>Email Id</th>
+       <th scope="col" hidden>No Of Seats</th>
+       <th scope="col">Round Trip</th>
+     
+       <th scope="col">Is Cancelled</th>
+       <th scope="col">Passenger Name</th>
+       <th scope="col">Age</th>
+       <th scope="col">Gender</th>
+       <th scope="col">Seat No</th>
+       <th scope="col">National Id</th>
+       <th scope="col">Meal</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let res of HistoryModels">
+       
+        <td>{{res.pnr}}</td>
+        <td>{{res.flightNo}}</td>
+        <td>{{res.boarding}}</td>
+        <td>{{res.destination}}</td>
+        <td>{{res.startDateTime}}</td>
+        <td hidden>{{res.endDateTime}}</td>
+        <td hidden>{{res.ticketCost}}</td>
+        <td hidden>{{res.emailId}}</td>
+        <td hidden>{{res.noOfSeats}}</td>
+        <td >{{res.isRoundTrip}}</td>
+       
+        <td>{{res.isCancelled}}</td>
+        <td>{{res.passengerName}}</td>
+        <td>{{res.age}}</td>
+        <td>{{res.gender}}</td>
+        <td>{{res.seatNo}}</td>
+        <td>{{res.nationalId}}</td>
+        <td>{{res.meal}}</td>
+        <td>
+            <button type="button" *ngIf="!res.isCancelled" (click)="CancelTicket(res.pnr)" class="btn btn-outline-primary" style="margin:10px">Cancel Ticket</button>
+            
+        </td>
+    </tr>
+</table>
+</div>
+</form>

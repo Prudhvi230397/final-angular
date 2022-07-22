@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.rtl.min.css"
+        integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="card-body">
+        <h2>Add Airline</h2>
+        <form class="row g-4" style="width: 50rem; top: 50px;align-self: center;"
+            [formGroup]="AirLineModel.formAirlineGroup">
+            <div class="col-md-4">
+                <label class="form-label">Airline Name</label>
+                <input [(ngModel)]="AirLineModel.airlineName" formControlName="airlineNameControl" class="form-control"
+                    type="text" />
+
+                <p style="color:red" [hidden]="!hasError('required','airlineNameControl')">Airline Name is required</p>
+
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Airline Logo</label>
+                <input [(ngModel)]="AirLineModel.airlineLogo" formControlName="airlineLogoControl" class="form-control"
+                    type="text" />
+                <p style="color:red" [hidden]="!hasError('required','airlineLogoControl')">Airline Logo is required</p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Contact Number</label>
+                <input [(ngModel)]="AirLineModel.contactNo" formControlName="contactNoControl" class="form-control"
+                    type="text" />
+                <p style="color:red" [hidden]="!hasError('required','contactNoControl')">Airline Contact Number is
+                    required</p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Airline Address</label>
+                <input [(ngModel)]="AirLineModel.address" formControlName="addressControl" class="form-control"
+                    type="text" />
+                <p style="color:red" [hidden]="!hasError('required','addressControl')">Airline Address is required</p>
+            </div>
+            <!-- <div class="col-md-4">
+                <label class="form-label">Block Airline</label>
+                <select class="form-select" [(ngModel)]="AirLineModel.isBlocked" formControlName="isBlockedControl">
+                    <option value=true>Yes</option>
+                    <option value=false>No</option>
+                </select>
+                <p style="color:red" [hidden]="!hasError('required','isBlockedControl')">Select Block Airline is
+                    required</p>
+            </div> -->
+
+            <div class="col-md-4">
+                <label></label>
+                <input type="submit" class="btn btn-primary" [disabled]="!(AirLineModel.formAirlineGroup.valid)"
+                    value="Add Airline" (click)="AddAirline()" />
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
+
+<form class="row g-3">
+    <div class="col-md-4">
+        <label class="form-label">Airline Details</label>
+        <table class="table table-striped-columns">
+
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col" hidden>Airline Id</th>
+                    <th scope="col" hidden>Airline Logo</th>
+                    <th scope="col">Airline Name</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Airline Address</th>
+
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let res of AirlineDetailModels" class="table-primary">
+                <td hidden class="table-primary">{{res.airlineId}}</td>
+                <td hidden class="table-primary">{{res.airlineLogo}}</td>
+                <td class="table-primary">{{res.airlineName}}</td>
+                <td class="table-primary">{{res.contactNo}}</td>
+                <td class="table-primary">{{res.address}}</td>
+
+                <td>
+
+                    <button type="button" *ngIf="!res.isBlocked" (click)="BlockAirline(res)"
+                        class="btn btn-outline-primary" style="margin:10px">Block</button>
+                    <button type="button" *ngIf="!!res.isBlocked" (click)="unBlockAirline(res)"
+                        class="btn btn-outline-primary" style="margin:10px">UnBlock</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

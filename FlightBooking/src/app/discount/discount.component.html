@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.rtl.min.css"
+        integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="card-body">
+        <h2>Manage Discount</h2>
+        <form class="row g-4" style="width: 50rem; top: 50px;align-self: center;"
+            [formGroup]="DiscountModel.formDiscountGroup">
+            <div class="col-md-4">
+                <label class="form-label">Discount Code</label>
+                <input [(ngModel)]="DiscountModel.discountCode" formControlName="discountCodeControl"
+                    class="form-control" type="text" />
+
+                <p style="color:red" [hidden]="!hasError('required','discountCodeControl')">Discount Code is required
+                </p>
+
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Discount Value </label>
+                <input [(ngModel)]="DiscountModel.discountValue" formControlName="discountValueControl"
+                    class="form-control" type="text" />
+                <p style="color:red" [hidden]="!hasError('required','discountValueControl')">Discount Value is required
+                </p>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Expiry Date</label>
+                <input [(ngModel)]="DiscountModel.expiryDate" formControlName="expiryDateControl" class="form-control"
+                    type="date" />
+                <p style="color:red" [hidden]="!hasError('required','expiryDateControl')">Expiry Date is required</p>
+            </div>
+
+            <div class="col-md-4">
+                <label></label>
+                <input type="submit" class="btn btn-primary" [disabled]="!(DiscountModel.formDiscountGroup.valid)"
+                    value="Add Discount" (click)="AddDiscount()" />
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
+
+<form class="row g-3">
+    <div class="col-md-4">
+        <label class="form-label"> Discount Details</label>
+        <table class="table table-striped-columns">
+
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col">Discount id</th>
+                    <th scope="col">Discount Code</th>
+                    <th scope="col">Discount Value</th>
+                    <th scope="col">Expiry Date</th>
+
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let res of DiscountDataModel" class="table-primary">
+
+                <td class="table-primary">{{res.discountId}}</td>
+                <td class="table-primary">{{res.discountCode}}</td>
+                <td class="table-primary">{{res.discountValue}}</td>
+                <td class="table-primary">{{res.expiryDate}}</td>
+                <td>
+
+                    <button type="button" (click)="DeleteDiscount(res)" class="btn btn-outline-primary"
+                        style="margin:10px">Delete</button>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

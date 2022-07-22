@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-xl-9">
+        <div class="card border-0">
+            <div class="row g-3">
+                <h2>Add Airline</h2>
+                <!-- <form [formGroup]="AirLineModel.formAirlineGroup"> -->
+                <div >
+
+                    <span class="form-label">PNR</span>
+                    <input type="text" class="form-control" [(ngModel)]="TicketModel.pnr">
+                </div>
+
+                <div class="col-md-4">
+                    <input type="submit" class="btn btn-primary" value="Get Ticket Details" (click)="GetDetails()" />
+                </div>
+                <!-- </form>  -->
+            </div>
+        </div>
+    </div>
+</div>
+<form class="row g-3">
+    <div class="col-md-4">
+        <!-- <label class="form-label">Ticket Details</label> -->
+        <table class="table table-striped-columns">
+            <caption>Ticket Details</caption>
+
+            <thead class="table-light">
+                <tr class="table-primary">
+                    <th scope="col">Booking Id</th>
+                    <th scope="col">PNR</th>
+                    <th scope="col">Flight Number</th>
+                    <th scope="col">Boarding</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Start Date </th>
+                    <th scope="col" hidden>End Date Time</th>
+                    <th scope="col">Ticket Cost</th>
+                    <th scope="col">Email Id</th>
+                    <th scope="col">No Of Seats</th>
+                    <th scope="col">Round Trip</th>
+                    <th scope="col">One Ticket Cost</th>
+                    <th scope="col">Total Trip Cost</th>
+                    <th scope="col">Is Cancelled</th>
+                </tr>
+            </thead>
+
+            <tr *ngFor="let res of TicketDetailsModels">
+                <td>{{res.bookingId}}</td>
+                <td>{{res.pnr}}</td>
+                <td>{{res.flightNo}}</td>
+                <td>{{res.boarding}}</td>
+                <td>{{res.destination}}</td>
+                <td>{{res.startDateTime}}</td>
+                <td hidden>{{res.endDateTime}}</td>
+                <td>{{res.ticketCost}}</td>
+                <td>{{res.emailId}}</td>
+                <td>{{res.noOfseats}}</td>
+                <td>{{res.isRoundTrip}}</td>
+                <td>{{res.ticketCost}}</td>
+                <td>{{res.totalCost}}</td>
+                <td>{{res.isCancelled}}</td>
+            </tr>
+        </table>
+    </div>
+</form>

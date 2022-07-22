@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.rtl.min.css"
+        integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous">
+</head>
+<body >
+    <form class="card" style="width: 25rem; top: 50px;align-self: center;" [formGroup]="registerModel.formUserGroup">
+        <div class="card-body">
+            <h2>Register</h2>
+            <div>
+                <label class="form-label">UserName</label>
+                <input [(ngModel)]="registerModel.userName" formControlName="UserNameControl" class="form-control" type="text" />
+                <p style="color:red" [hidden]="!hasError('required','UserNameControl')">User Name is
+                    required</p>
+            </div>
+            <div>
+                <label class="form-label">Password</label>
+                <input [(ngModel)]="registerModel.password" formControlName="passWordControl" class="form-control" type="password" />
+                <p style="color:red" [hidden]="!hasError('required','passWordControl')">Password is
+                    required</p>
+            </div>
+            <div class="py-4">
+                <input type="submit" class="btn btn-primary" value="Register" (click)="Register()" />
+            </div>
+
+            <div class="py-4">
+                <label class="form-label">Existing User ? <a href="/login"> Login</a>
+                </label>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+
+

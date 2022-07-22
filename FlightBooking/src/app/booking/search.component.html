@@ -1,0 +1,145 @@
+<div class="row">
+    <div class="col-xl-9">
+        <div class="card border-0">
+            <div class="card-body">
+                <h2>Search Flight</h2>
+                <form class="row g-3" [formGroup]="SearchModel.formSearchGroup">
+                    <div class="col-md-4">
+                        <label class="form-label">Boarding </label>
+                        <select class="form-select" [(ngModel)]="SearchModel.boardingPlace"
+                            formControlName="boardingPlaceControl">
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Banglore">Banglore</option>
+                            <option value="Indore">Indore</option>
+                            <option value="Kochi">Kochi</option>
+                        </select>
+                        <p style="color:red" [hidden]="!hasError('required','boardingPlaceControl')">Boarding place is
+                            required
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Destination</label>
+                        <select class="form-select" [(ngModel)]="SearchModel.destination"
+                            formControlName="destinationControl">
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Banglore">Banglore</option>
+                            <option value="Indore">Indore</option>
+                            <option value="Kochi">Kochi</option>
+                        </select>
+                        <p style="color:red" [hidden]="!hasError('required','destinationControl')">Destination is
+                            required</p>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Start date</label>
+                        <input [(ngModel)]="SearchModel.startDateTime" formControlName="startDateTimeControl"
+                            class="form-control" type="date" />
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Round Trip</label>
+                        <select class="form-select" [(ngModel)]="SearchModel.isRoundTrip" 
+                            formControlName="isRoundTripControl">
+                            <option value=true>Yes</option>
+                            <option value=false>No</option>
+                        </select>
+                        <p style="color:red" [hidden]="!hasError('required','isRoundTripControl')">Select Round trip
+                            Yes/No</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Round Trip date</label>
+                        <input [(ngModel)]="SearchModel.roundStartDateTime" [ngModelOptions]="{standalone: true}"
+                            class="form-control" type="date" />
+                    </div>
+
+                    <div class="py-4">
+                        <input type="submit" class="btn btn-primary" [disabled]="!(SearchModel.formSearchGroup.valid)"
+                            value="Search Flight" (click)="SearchFlight()" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<form class="row g-3">
+    <div class="col-md-4" *ngIf="OnwardModels.length>0">
+        <label class="form-label">Onward Details</label>
+        <table class="table table-striped-columns">
+
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col" hidden>Flight Id</th>
+                    <th scope="col" hidden>Airline Logo</th>
+                    <th scope="col">Airline Name</th>
+                    <th scope="col">Flight Number</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Ticket Cost</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let res of OnwardModels" class="table-primary">
+                <td hidden class="table-primary">{{res.flightId}}</td>
+                <td hidden class="table-primary">{{res.airlineLogo}}</td>
+                <td class="table-primary">{{res.airlineName}}</td>
+                <td class="table-primary">{{res.flightNo}}</td>
+                <td class="table-primary">{{res.startDateTime}}</td>
+                <td class="table-primary">{{res.endDateTime}}</td>
+                <td class="table-primary">{{res.ticketCost}}</td>
+                <td>
+                    <!-- <input class="form-check-input" type="checkbox"   value="true"> -->
+                    <button type="button" (click)="selectedRowOnward(res)" class="btn btn-outline-primary"
+                        style="margin:10px">Select</button>
+                    <!--<button type="button" (click)="DeleteCustomer(cust)" class="btn btn-outline-primary" >Delete</button> -->
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-4" *ngIf="RoundTripModels.length>0">
+        <label class="form-label">Round Trip Details</label>
+        <table class="table table-striped-columns">
+
+            <thead class="table-light">
+                <tr class="table-primary">
+                    <th scope="col" hidden>Flight Id</th>
+                    <th scope="col" hidden>Airline Logo</th>
+                    <th scope="col">Airline Name</th>
+                    <th scope="col">Flight Number</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Ticket Cost</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let res of RoundTripModels">
+                <td hidden class="table-primary">{{res.flightId}}</td>
+                <td hidden class="table-primary">{{res.airlineLogo}}</td>
+                <td class="table-primary">{{res.airlineName}}</td>
+                <td class="table-primary">{{res.flightNo}}</td>
+                <td class="table-primary">{{res.startDateTime}}</td>
+                <td class="table-primary">{{res.endDateTime}}</td>
+                <td class="table-primary">{{res.ticketCost}}</td>
+                <td>
+
+                    <button type="button" (click)="selectedRowRoundTrip(res)" class="btn btn-outline-primary"
+                        style="margin:10px">Select</button>
+                    <!-- <button type="button" (click)="DeleteCustomer(cust)" class="btn btn-outline-primary" >Delete</button> -->
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <button type="button" (click)="navigateToBookTicket()" class="btn btn-outline-primary" style="margin:10px">Book
+            Ticket</button>
+    </div>
+</form>
+
+<div class="container-fluid" style="margin: 50px">
+    <router-outlet></router-outlet>
+</div>
